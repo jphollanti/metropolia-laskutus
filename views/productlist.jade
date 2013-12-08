@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1.
+    Tuotelista
+  ul 
+    each product, i in productlist
+      li
+        a(href="www.google.com")= product.name

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1.
+    Laskulista
+  ul 
+    each invoice, i in invoicelist
+      li
+        a(href="www.google.com")= invoice.name

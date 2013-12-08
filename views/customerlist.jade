@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1.
+    Asiakaslista
+  ul 
+    each customer, i in customerlist
+      li
+        a(href="www.google.com")= customer.name
