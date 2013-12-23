@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1.
+    test
+
+  form(method='post' action='/invoice/add_customer_form')
+    table
+      td
+        input(name='testi')
+    input(type='submit')
