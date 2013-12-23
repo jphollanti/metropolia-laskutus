@@ -4,12 +4,17 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
+var invoice = require('./routes/invoice');
 var http = require('http');
 var path = require('path');
 
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/metropolia-laskutus');
+
 var app = express();
+
+app.set ('view engine', 'jade');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -31,8 +36,14 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/', invoice.index());
+app.get('/invoice/customer', invoice.customer(db));
+app.get('/invoice/person', invoice.person(db));
+app.get('/invoice/invoice', invoice.invoice(db));
+app.get('/invoice/product', invoice.product(db));
+
+app.get('/invoice/add_customer_form', invoice.add_customer_form());
+app.post('/invoice/add_customer_form', invoice.add_customer_form_post());
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

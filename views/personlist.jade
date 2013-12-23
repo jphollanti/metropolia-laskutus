@@ -6,4 +6,5 @@ block content
   ul 
     each person, i in personlist
       li
-        a(href="www.google.com")= person.name
+        #{person.firstname} #{person.lastname} 
+        a(href="www.google.com")= person.customer.name
