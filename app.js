@@ -4,8 +4,11 @@
  */
 
 var express = require('express');
+
 var invoice = require('./routes/invoice');
 var person = require('./routes/invoice/person');
+var customer = require('./routes/invoice/customer');
+
 var http = require('http');
 var path = require('path');
 var mongo = require('mongodb');
@@ -38,13 +41,13 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', invoice.index());
-app.get('/invoice/customer', invoice.customer(mongoClient));
 app.get('/invoice/person', person.person(mongoClient));
 app.get('/invoice/invoice', invoice.invoice(mongoClient));
 app.get('/invoice/product', invoice.product(mongoClient));
 
-app.get('/invoice/add_customer_form', invoice.add_customer_form());
-app.post('/invoice/add_customer_form', invoice.add_customer_form_post());
+app.get('/invoice/customer', customer.customer(mongoClient));
+app.get('/invoice/add_customer_form', customer.add_customer_form());
+app.post('/invoice/add_customer_form', customer.add_customer_form_post());
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
