@@ -5,12 +5,13 @@
 
 var express = require('express');
 var invoice = require('./routes/invoice');
+var person = require('./routes/invoice/person');
 var http = require('http');
 var path = require('path');
-
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/metropolia-laskutus');
+
+// Retrieve
+var mongoClient = mongo.MongoClient;
 
 var app = express();
 
@@ -37,10 +38,10 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', invoice.index());
-app.get('/invoice/customer', invoice.customer(db));
-app.get('/invoice/person', invoice.person(db));
-app.get('/invoice/invoice', invoice.invoice(db));
-app.get('/invoice/product', invoice.product(db));
+app.get('/invoice/customer', invoice.customer(mongoClient));
+app.get('/invoice/person', person.person(mongoClient));
+app.get('/invoice/invoice', invoice.invoice(mongoClient));
+app.get('/invoice/product', invoice.product(mongoClient));
 
 app.get('/invoice/add_customer_form', invoice.add_customer_form());
 app.post('/invoice/add_customer_form', invoice.add_customer_form_post());
