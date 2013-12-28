@@ -4,8 +4,59 @@ block content
   h1.
     test
 
-  form(method='post' action='/invoice/add_customer_form')
+  form(method='post' action='/invoice/customer/add')
     table
-      td
-        input(name='testi')
+      tr
+        td
+          span ID:
+        td
+          input(name='id')
+      tr
+        td
+          span Nimi:
+        td
+          input(name="name")
+      tr
+        td
+          span Ryhmä:
+        td
+          input(name="group")
+      tr
+        td
+          span Osoite:
+        td
+          input(name="address")
+      tr
+        td
+          span Postinumero:
+        td
+          input(name="post-code")
+      tr
+        td
+          span Postitoimipaikka:
+        td
+          input(name="post-office")
+      tr
+        td
+          span Työpuhelin:
+        td
+          input(name="phone-work")
+      tr
+        td
+          span GSM:
+        td
+          input(name="gsm")
+      tr
+        td
+          span Kotipuhelin
+        td
+          input(name="phone-home")
+      tr
+        td
+          span Lisätiedot:
+        td
+          textarea(name="additional-info")
     input(type='submit')
+
+
+
