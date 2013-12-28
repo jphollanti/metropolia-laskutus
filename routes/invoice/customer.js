@@ -1,4 +1,4 @@
-exports.customer = function(mongoClient) {
+exports.list = function(mongoClient) {
   return function(req, res) {
   
     mongoClient.connect("mongodb://localhost:27017/metropolia-laskutus", function(err, db) {
@@ -14,14 +14,14 @@ exports.customer = function(mongoClient) {
   };
 };
 
-exports.add_customer_form = function() {
+exports.addForm = function() {
   return function(req, res) {
     res.render('add-customer-form');
   }
 }
 
-exports.add_customer_form_post = function(db) {
+exports.add = function(mongoClient) {
   return function(req, res) {
-    res.render('add-customer-form-post', {testi:req.body.testi});
+    res.render('add-customer', {testi:req.body.testi});
   }
 }

@@ -1,6 +1,5 @@
 pmap = function() {
   var cn = customerResolver.resolve(this.customer); 
-  print("customer name: " + cn);
   return emit(this._id
               , { id: this._id
 	        , firstname: this.firstname
@@ -68,8 +67,6 @@ function joinPersonWithCompany(mongoClient, callback) {
 exports.person = function(db) {
   return function(req, res) {
     joinPersonWithCompany(db, function(err, result) {
-      console.log("done");
-      console.dir(result)
       res.render('personlist', {
         "personlist": result
       });
