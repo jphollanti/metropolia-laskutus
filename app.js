@@ -40,16 +40,27 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Main menu
 app.get('/', invoice.index());
-app.get('/invoice/person', person.person(mongoClient));
-app.get('/invoice/invoice', invoice.invoice(mongoClient));
+
+// Product
 app.get('/invoice/product', invoice.product(mongoClient));
 
+// Contact person
+app.get('/invoice/person', person.person(mongoClient));
+
+// Customer
 app.get('/invoice/customer/list', customer.list(mongoClient));
 app.get('/invoice/customer/add', customer.addForm());
 app.post('/invoice/customer/add', customer.add(mongoClient));
 app.get('/invoice/customer/delete', customer.delete(mongoClient));
 
+// Invoices
+app.get('/invoice/invoice', invoice.invoice(mongoClient));
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+
+
