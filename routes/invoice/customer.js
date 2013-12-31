@@ -1,16 +1,6 @@
 exports.list = function(mongoClient) {
   return function(req, res) {
-  
-    mongoClient.connect("mongodb://localhost:27017/metropolia-laskutus", function(err, db) {
-      if(err) {
-        throw err;
-      }
-      db.collection('customer').find().toArray(function(err, docs) {
-        res.render('customerlist', {
-          "customerlist": docs
-        });
-      });
-    });
+    renderList(mongoClient, req, res);
   };
 };
 
@@ -22,13 +12,9 @@ exports.addForm = function() {
 
 exports.add = function(mongoClient) {
   return function(req, res) {
-    
-    mongoClient.connect("mongodb://localhost:27017/metropolia-laskutus", function(err, db) {
-      if (err) {
-        throw err;
-      }
+    connect(mongoClient, function(err, db) {
       db.collection('customer').insert(req.body, function(err, result) {
-        res.render('add-customer', {testi:req.body.testi});
+        renderList(mongoClient, req, res);
       });
     });
   }
@@ -38,4 +24,23 @@ exports.delete = function(mongoClient) {
   return function(req, res) {
     
   }
+}
+
+function connect(mongoClient, callback) {
+  mongoClient.connect("mongodb://localhost:27017/metropolia-laskutus", function(err, db) {
+    if (err) {
+      throw err;
+    }
+    callback(err, db);
+  });
+}
+
+function renderList(mongoClient, req, res) {
+  connect(mongoClient, function(err, db) {
+    db.collection('customer').find().toArray(function(err, docs) {
+      res.render('customerlist', {
+        "customerlist": docs
+      });
+    });
+  });
 }

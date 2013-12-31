@@ -16,3 +16,5 @@ block content
           a(href="www.google.com")= customer.name 
         td
           a(href="/invoice/customer/delete?id=#{customer._id}") Poista asiakas
+        td
+          a(href="/invoice/person/add?company=#{customer._id}") Lisää yhteyshenkilö
