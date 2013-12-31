@@ -33,3 +33,9 @@ exports.add = function(mongoClient) {
     });
   }
 }
+
+exports.delete = function(mongoClient) {
+  return function(req, res) {
+    
+  }
+}

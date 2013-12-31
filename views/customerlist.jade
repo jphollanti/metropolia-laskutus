@@ -9,7 +9,10 @@ block content
 
   h1.
     Asiakaslista
-  ul 
+  table
     each customer, i in customerlist
-      li
-        a(href="www.google.com")= customer.name
+      tr
+        td
+          a(href="www.google.com")= customer.name 
+        td
+          a(href="/invoice/customer/delete?id=#{customer._id}") Poista asiakas
