@@ -53,7 +53,7 @@ app.post('/invoice/customer/add', customer.add(mongoClient));
 app.get('/invoice/customer/delete', customer.delete(mongoClient));
 
 // Contact person
-app.get('/invoice/person', person.person(mongoClient));
+app.get('/invoice/person/list', person.list(mongoClient));
 app.get('/invoice/person/add', person.addForm(mongoClient));
 app.post('/invoice/person/add', person.add(mongoClient));
 

@@ -1,4 +1,5 @@
 var common = require('./common.js');
+var ObjectID = require('mongodb').ObjectID;
 
 exports.addForm = function(mongoClient) {
   return function(req, res) {
@@ -20,78 +21,53 @@ exports.add = function(mongoClient) {
   }
 }
 
-pmap = function() {
-  var cn = customerResolver.resolve(this.customer); 
-  return emit(this._id
-              , { id: this._id
-	        , firstname: this.firstname
-		, lastname: this.lastname
-		, title: this.title
-		, customerId: this.customer
-		, customerName:cn});
-};
-
-preduce = function(key, values) {
-  return values[0];
-};
-
-cmap = function() {
-  return emit(this._id, {name: this.name});
-};
-
-creduce = function(key, values) {
-  return values[0];
-};
-
-getCustomerResolver = function(customers) { 
-  return {
-    data: customers, 
-    resolve: function(_id) {
-      var value = "";
-      this.data.forEach(function(item) {
-        if (item._id.equals(_id)) {
-          value = item.value.name;
-        }
-      });
-      return value;
-    }
-  }
-}
-
-function joinPersonWithCompany(mongoClient, callback) {
-  mongoClient.connect("mongodb://localhost:27017/metropolia-laskutus"
-    , function(err, db) {
-        if(err) {
-          throw err;
-        }
-
-        db.collection('customer').mapReduce(
-	       cmap
-	     , creduce
-	     , { out: {inline : 1}}
-	     , function(err, customers) {
-          
-          db.collection('person').mapReduce(
-              pmap
-            , preduce
-            , { out: {inline : 1}
-              , scope: { 
-                customerResolver: getCustomerResolver(customers)
-                }
-              }
-            , callback 
-          );
-        }
-    );
-  });
-}
-
-exports.person = function(db) {
+exports.list = function(mongoClient) {
   return function(req, res) {
-    joinPersonWithCompany(db, function(err, result) {
-      res.render('personlist', {
-        "personlist": result
+    //var customer = req.query.customer;
+    //console.log("customer: " + customer);
+    //var cid = new ObjectID(req.query.customer);
+
+    common.connect(mongoClient, function(err, db) {
+      db.collection('person').find({customer:req.query.customer}).toArray(function(err, people) {
+        db.collection('customer').find({_id: {$in: getCustomerIds(people)}}, {}).toArray(function(err, customers) {
+          res.render('personlist', {
+            "personlist": mergePeopleAndCustomers(people, customers)
+          });
+        });
       });
     });
   };
 };
+
+function getCustomerIds(people) {
+  var customerIds = new Array();
+  for (var i=0; i<people.length; i++) {
+    customerIds.push(new ObjectID(people[i].customer));
+  }
+  return customerIds;
+}
+
+function mergePeopleAndCustomers(people, customers) {
+  var personList = new Array();
+  people.forEach(function(person) {
+    customers.forEach(function(customer) {
+      if (person.customer == customer._id) {
+        personList.push(getNewPersonMergedWithCustomer(person, customer));
+      }
+    });
+  });
+  return personList;
+}
+
+function getNewPersonMergedWithCustomer(person, customer) {
+  return { _id: person._id,
+           firstname: person.firstname, 
+           lastname: person.lastname,
+           customer: person.customer,
+           customerName: customer.name
+         }
+}
+
+
+
+
