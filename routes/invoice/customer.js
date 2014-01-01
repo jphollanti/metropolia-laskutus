@@ -1,4 +1,4 @@
-var dbc = require('./common.js');
+var common = require('./common.js');
 
 exports.list = function(mongoClient) {
   return function(req, res) {
@@ -29,7 +29,7 @@ exports.delete = function(mongoClient) {
 }
 
 function renderList(mongoClient, req, res) {
-  dbc.connect(mongoClient, function(err, db) {
+  common.connect(mongoClient, function(err, db) {
     db.collection('customer').find().toArray(function(err, docs) {
       res.render('customerlist', {
         "customerlist": docs
