@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1.
+    Lisää yhteyshenkilö
+
+  form(method='post' action='/invoice/person/add')
+    input(type='hidden' name='customer-id' value='#{customer}')
+    table
+      tr
+        td
+          span Henkilötunnus:
+        td
+          input(name='person-id')
+      tr
+        td
+          span Sukunimi:
+        td
+          input(name='lastname')
+      tr
+        td
+          span Etunimi:
+        td
+          input(name='firstname')
+      tr
+        td
+          span Nimike:
+        td
+          input(name='title')
+      tr
+        td
+          span Luokitus:
+        td
+          input(name='class')
+      tr
+        td
+          span Päivämäärä:
+        td
+          input(name='date')
+      tr
+        td
+          span Lisätietoja:
+        td
+          input(name='additional-info')
+    input(type='submit')

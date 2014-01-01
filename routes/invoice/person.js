@@ -1,3 +1,25 @@
+var common = require('./common.js');
+
+exports.addForm = function(mongoClient) {
+  return function(req, res) {
+    res.render('person-add', {
+      "customer": req.query.customer
+    });
+  }
+}
+
+exports.add = function(mongoClient) {
+  return function(req, res) {
+    common.connect(mongoClient, function(err, db) {
+      db.collection('person').insert(req.body, function(err, result) {
+        res.render('person-added', {
+          
+        });
+      });
+    });
+  }
+}
+
 pmap = function() {
   var cn = customerResolver.resolve(this.customer); 
   return emit(this._id
