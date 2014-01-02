@@ -8,7 +8,7 @@ var express = require('express');
 var product = require('./routes/invoice/product');
 var customer = require('./routes/invoice/customer');
 var person = require('./routes/invoice/person');
-var invoice = require('./routes/invoice');
+var invoice = require('./routes/invoice/invoice');
 
 var http = require('http');
 var path = require('path');
@@ -63,7 +63,10 @@ app.post('/invoice/person/add', person.add(mongoClient));
 app.get('/invoice/person/delete', person.delete(mongoClient));
 
 // Invoices
-app.get('/invoice/invoice', invoice.invoice(mongoClient));
+app.get('/invoice/list', invoice.list(mongoClient));
+app.get('/invoice/add', invoice.addForm());
+app.post('/invoice/add', invoice.add(mongoClient));
+app.get('/invoice/remove', invoice.remove(mongoClient));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
