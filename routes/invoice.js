@@ -9,7 +9,7 @@ exports.invoice = function(db) {
     var invoice = db.get('invoice');
     invoice.find({}, {}, function(e, docs) {
       res.render('invoicelist', {
-        "invoicelist": docs
+        "invoice-list": docs
       });
     }); 
   };
@@ -20,7 +20,7 @@ exports.product = function(db) {
     var product = db.get('product');
     product.find({}, {}, function(e, docs) {
       res.render('productlist', {
-        "productlist": docs
+        "product-list": docs
       });
     }); 
   };

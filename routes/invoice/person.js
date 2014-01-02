@@ -30,7 +30,7 @@ exports.list = function(mongoClient) {
     common.connect(mongoClient, function(err, db) {
       db.collection('person').find({customer:req.query.customer}).toArray(function(err, people) {
         db.collection('customer').find({_id: {$in: getCustomerIds(people)}}, {}).toArray(function(err, customers) {
-          res.render('personlist', {
+          res.render('person-list', {
             "personlist": mergePeopleAndCustomers(people, customers)
           });
         });

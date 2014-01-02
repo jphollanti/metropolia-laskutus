@@ -8,13 +8,13 @@ exports.list = function(mongoClient) {
 
 exports.addForm = function() {
   return function(req, res) {
-    res.render('add-customer-form');
+    res.render('customer-add');
   }
 }
 
 exports.add = function(mongoClient) {
   return function(req, res) {
-    connect(mongoClient, function(err, db) {
+    common.connect(mongoClient, function(err, db) {
       db.collection('customer').insert(req.body, function(err, result) {
         renderList(mongoClient, req, res);
       });
@@ -24,14 +24,14 @@ exports.add = function(mongoClient) {
 
 exports.delete = function(mongoClient) {
   return function(req, res) {
-    
+    res.render('customer-removed', {});
   }
 }
 
 function renderList(mongoClient, req, res) {
   common.connect(mongoClient, function(err, db) {
     db.collection('customer').find().toArray(function(err, docs) {
-      res.render('customerlist', {
+      res.render('customer-list', {
         "customerlist": docs
       });
     });
