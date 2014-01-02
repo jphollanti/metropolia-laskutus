@@ -1,0 +1,34 @@
+extends layout
+
+block content
+  h1.
+    Lisää Lasku
+
+  form(method='post' action='/invoice/add')
+    table
+      tr
+        td
+          span Tuotekoodi:
+        td
+          input(name='code')
+      tr
+        td
+          span Nimi:
+        td
+          input(name='name')
+      tr
+        td
+          span Tuoteryhmä:
+        td
+          input(name='group')
+      tr
+        td
+          span Hinta:
+        td
+          input(name='price')
+      tr
+        td
+          span Liikevaihtoverollinen:
+        td
+          input(name='taxable')
+    input(type='submit')
