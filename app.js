@@ -5,9 +5,10 @@
 
 var express = require('express');
 
-var invoice = require('./routes/invoice');
-var person = require('./routes/invoice/person');
+var product = require('./routes/invoice/product');
 var customer = require('./routes/invoice/customer');
+var person = require('./routes/invoice/person');
+var invoice = require('./routes/invoice');
 
 var http = require('http');
 var path = require('path');
@@ -44,7 +45,10 @@ if ('development' == app.get('env')) {
 app.get('/', invoice.index());
 
 // Product
-app.get('/invoice/product', invoice.product(mongoClient));
+app.get('/invoice/product/list', product.list(mongoClient));
+app.get('/invoice/product/add', product.addForm(mongoClient));
+app.post('/invoice/product/add', product.add(mongoClient));
+app.get('/invoice/product/remove', product.remove(mongoClient));
 
 // Customer
 app.get('/invoice/customer/list', customer.list(mongoClient));
@@ -57,6 +61,7 @@ app.get('/invoice/person/list', person.list(mongoClient));
 app.get('/invoice/person/add', person.addForm(mongoClient));
 app.post('/invoice/person/add', person.add(mongoClient));
 app.get('/invoice/person/delete', person.delete(mongoClient));
+
 // Invoices
 app.get('/invoice/invoice', invoice.invoice(mongoClient));
 

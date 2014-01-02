@@ -15,14 +15,3 @@ exports.invoice = function(db) {
   };
 };
 
-exports.product = function(db) {
-  return function(req, res) {
-    var product = db.get('product');
-    product.find({}, {}, function(e, docs) {
-      res.render('productlist', {
-        "product-list": docs
-      });
-    }); 
-  };
-};
-
