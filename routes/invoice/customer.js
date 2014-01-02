@@ -1,4 +1,5 @@
 var common = require('./common.js');
+var ObjectID = require('mongodb').ObjectID;
 
 exports.list = function(mongoClient) {
   return function(req, res) {
