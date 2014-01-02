@@ -9,7 +9,10 @@ block content
 
   h1.
     Tuotelista
-  ul 
+  table 
     each product, i in productlist
-      li
-        a(href="www.google.com")= product.name
+      tr
+        td
+          a(href="www.google.com")= product.name
+        td
+          a(href="/invoice/product/remove?id=#{product._id}") Poista tuote
