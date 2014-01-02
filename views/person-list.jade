@@ -1,6 +1,12 @@
 extends layout
 
 block content
+  h2.
+    Toiminnot
+  ul
+    li 
+      a(href="/invoice/person/add?customer=#{customerId}") Lisää yhteyshenkilö
+
   h1.
     Henkilölista
   ul 

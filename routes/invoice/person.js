@@ -31,6 +31,7 @@ exports.list = function(mongoClient) {
       db.collection('person').find({customer:req.query.customer}).toArray(function(err, people) {
         db.collection('customer').find({_id: {$in: getCustomerIds(people)}}, {}).toArray(function(err, customers) {
           res.render('person-list', {
+            "customerId": req.query.customer,
             "personlist": mergePeopleAndCustomers(people, customers)
           });
         });
