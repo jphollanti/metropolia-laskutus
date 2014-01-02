@@ -8,3 +8,4 @@ block content
       li
         #{person.firstname} #{person.lastname} 
         a(href="www.google.com")= person.customerName
+        a(href="/invoice/person/delete?delete=#{person._id}") Poista henkilö

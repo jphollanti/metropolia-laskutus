@@ -56,7 +56,7 @@ app.get('/invoice/customer/delete', customer.delete(mongoClient));
 app.get('/invoice/person/list', person.list(mongoClient));
 app.get('/invoice/person/add', person.addForm(mongoClient));
 app.post('/invoice/person/add', person.add(mongoClient));
-
+app.get('/invoice/person/delete', person.delete(mongoClient));
 // Invoices
 app.get('/invoice/invoice', invoice.invoice(mongoClient));
 

@@ -68,6 +68,22 @@ function getNewPersonMergedWithCustomer(person, customer) {
          }
 }
 
+exports.delete = function(mongoClient) {
+  return function(req, res) {
+    var delPerson = req.query.delete;
+    if (typeof delPerson == 'undefined' ||
+        delPerson === null || 
+        delPerson === '') {
+      throw new Error("Document to delete has not been specified.");
+    }
+    common.connect(mongoClient, function(err, db) {
+      var pid = new ObjectID(delPerson);
+      db.collection('person').remove({_id: pid}, {w:1}, function(err, result) {
+        res.render('person-removed');
+      });
+    });
+  };
+};
 
 
 
