@@ -22,12 +22,6 @@ exports.add = function(mongoClient) {
   }
 }
 
-exports.delete = function(mongoClient) {
-  return function(req, res) {
-    res.render('customer-removed', {});
-  }
-}
-
 function renderList(mongoClient, req, res) {
   common.connect(mongoClient, function(err, db) {
     db.collection('customer').find().toArray(function(err, docs) {
@@ -37,3 +31,22 @@ function renderList(mongoClient, req, res) {
     });
   });
 }
+exports.delete = function(mongoClient) {
+  return function(req, res) {
+    var delCustomer = req.query.id;
+    if (typeof delCustomer == 'undefined' ||
+        delCustomer === null || 
+        delCustomer === '') {
+      throw new Error("Document to delete has not been specified.");
+    }
+    common.connect(mongoClient, function(err, db) {
+      var cid = new ObjectID(delCustomer);
+      db.collection('customer').remove({_id: cid}, {w:1}, function(err, result) {
+        res.render('customer-removed');
+      });
+    });
+  };
+};
+
+
+
