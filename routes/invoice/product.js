@@ -29,12 +29,6 @@ exports.add = function(mongoClient) {
   }
 }
 
-exports.remove = function() {
-  return function(req, res) {
-    res.render('product-removed', {});
-  }
-}
-
 exports.remove = function(mongoClient) {
   return function(req, res) {
     var delProduct = req.query.id;
