@@ -45,8 +45,20 @@ exports.addForm = function(mongoClient) {
 exports.add = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
-      db.collection('invoice').insert(req.body, function(err, result) {
-        res.render('invoice-added', {});
+      console.log("customer: " + req.body.customer);
+      db.collection('customer').findOne({_id:new ObjectID(req.body.customer)}, {}, function(err, customer) {
+        db.collection('person').findOne({_id:new ObjectID(req.body.person)}, {}, function(err, person) {
+          console.log("customer: %j", customer);
+          console.log("person: %j", person);
+          req.body.customer = customer;
+          req.body.person = person;
+          req.body.status = 1;
+          req.body.created = new Date();
+          req.body.paid = null;
+          db.collection('invoice').insert(req.body, function(err, result) {
+            res.render('invoice-added', {});
+          });
+        });
       });
     });
   }
