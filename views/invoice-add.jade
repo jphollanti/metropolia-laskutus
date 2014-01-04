@@ -1,5 +1,9 @@
 extends layout
 
+block append head
+  script( type="text/javascript", src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.1/jquery.min.js" )
+  script( type='text/javascript', src="/js/invoice-add.js" )
+
 block content
   h1.
     Lisää Lasku
@@ -8,27 +12,38 @@ block content
     table
       tr
         td
-          span Tuotekoodi:
+          span Asiakas:
         td
-          input(name='code')
+          select(name="customer" id="customer")
+            option Valitse
+            for customer in customers
+              option(value="#{customer._id}") #{customer.name}
       tr
         td
-          span Nimi:
+          span Yhteyshenkilö:
         td
-          input(name='name')
+          select(name"person" id="person")
       tr
         td
-          span Tuoteryhmä:
+          span Maksuaika:
         td
-          input(name='group')
+          input(name='payment-time')
       tr
         td
-          span Hinta:
+          span Viivästyskorko:
         td
-          input(name='price')
+          input(name='penalty-interest')
       tr
         td
-          span Liikevaihtoverollinen:
+          span Arvonlisäverovelvollinen:
         td
-          input(name='taxable')
+          input(name='includes-vat')
+      tr
+        td
+          span Huomautukset:
+        td
+          input(name='notifications')
     input(type='submit')
+
+script
+

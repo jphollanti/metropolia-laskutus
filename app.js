@@ -64,9 +64,12 @@ app.get('/invoice/person/delete', person.delete(mongoClient));
 
 // Invoices
 app.get('/invoice/list', invoice.list(mongoClient));
-app.get('/invoice/add', invoice.addForm());
+app.get('/invoice/add', invoice.addForm(mongoClient));
 app.post('/invoice/add', invoice.add(mongoClient));
 app.get('/invoice/remove', invoice.remove(mongoClient));
+
+// JSON data for client side JS.
+app.get('/invoice/people', invoice.people(mongoClient));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

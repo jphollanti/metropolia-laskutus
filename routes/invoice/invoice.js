@@ -7,20 +7,38 @@ exports.index = function() {
   }
 }
 
-exports.list = function(db) {
+exports.people = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
-      db.collection('invoice').find().toArray(function(err, products) {
+      console.log("doinnit");
+      db.collection('person').find({customer:req.query.customer}).toArray(function(err, people) {
+        console.log("still doinnit!");
+        res.write(JSON.stringify(people));
+        res.end();
+      });
+    });
+  }
+}
+
+exports.list = function(mongoClient) {
+  return function(req, res) {
+    common.connect(mongoClient, function(err, db) {
+      db.collection('invoice').find().toArray(function(err, invoices) {
         res.render('invoice-list', {
           "invoicelist": invoices
         });
-    }); 
+      }); 
+    });
   };
 };
 
-exports.addForm = function() {
+exports.addForm = function(mongoClient) {
   return function(req, res) {
-    res.render('invoice-add', {});
+    common.connect(mongoClient, function(err, db) {
+      db.collection('customer').find().toArray(function(err, customers) {
+        res.render('invoice-add', {customers: customers});
+      });
+    });
   }
 }
 
