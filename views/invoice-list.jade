@@ -9,7 +9,11 @@ block content
 
   h1.
     Laskulista
-  ul 
+  table 
     each invoice, i in invoicelist
-      li
-        = invoice._id
+      tr
+        td
+          = invoice.customer.name 
+          #{invoice._id}
+        td
+          a(href="/invoice/item/add?invoice=#{invoice._id}") Lisää laskurivi

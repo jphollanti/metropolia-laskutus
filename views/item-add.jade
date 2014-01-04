@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1.
+    Lisää Lasku
+
+  form(method='post' action='/invoice/item/add')
+    input(type="hidden" name="invoice" value="#{invoice}")
+    table
+      tr
+        td
+          span Tuote:
+        td
+          select(name="product")
+            option Valitse
+            for product in products
+              option(value="#{product._id}") #{product.name}
+      tr
+        td
+          span Myyty kpl:
+        td
+          input(name='amountsold')
+      tr
+        td
+          span Hinta:
+        td
+          input(name='price')
+      tr
+        td
+          span Alennus-%:
+        td
+          input(name='discountpercentage')
+    input(type='submit')
+
+script
+

@@ -1,12 +1,6 @@
 var common = require('./common.js');
 var ObjectID = require('mongodb').ObjectID;
 
-exports.index = function() {
-  return function(req, res) {
-    res.render('index');
-  }
-}
-
 exports.people = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
@@ -20,23 +14,13 @@ exports.people = function(mongoClient) {
   }
 }
 
-exports.list = function(mongoClient) {
-  return function(req, res) {
-    common.connect(mongoClient, function(err, db) {
-      db.collection('invoice').find().toArray(function(err, invoices) {
-        res.render('invoice-list', {
-          "invoicelist": invoices
-        });
-      }); 
-    });
-  };
-};
-
 exports.addForm = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
-      db.collection('customer').find().toArray(function(err, customers) {
-        res.render('invoice-add', {customers: customers});
+      db.collection('product').find().toArray(function(err, products) {
+        res.render('item-add', 
+          {invoice: req.query.invoice, 
+           products: products});
       });
     });
   }
@@ -45,15 +29,16 @@ exports.addForm = function(mongoClient) {
 exports.add = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
-      db.collection('customer').findOne({_id:new ObjectID(req.body.customer)}, {}, function(err, customer) {
-        db.collection('person').findOne({_id:new ObjectID(req.body.person)}, {}, function(err, person) {
-          req.body.customer = customer;
-          req.body.person = person;
-          req.body.status = 1;
-          req.body.created = new Date();
-          req.body.paid = null;
-          req.body.items = [];
-          db.collection('invoice').insert(req.body, function(err, result) {
+      console.log("invoice: " + req.body.invoice);
+      db.collection('invoice').findOne({_id:new ObjectID(req.body.invoice)}, {}, function(err, invoice) {
+        db.collection('product').findOne({_id:new ObjectID(req.body.product)}, {}, function(err, product) {
+          invoice.items.push({
+            product: product, 
+            "amount-sold": req.body.amountsold, 
+            price: req.body.price,
+            "discount-percentage": req.body.discountpercentage
+          });
+          db.collection('invoice').save(invoice, function(err, result) {
             res.render('invoice-added', {});
           });
         });

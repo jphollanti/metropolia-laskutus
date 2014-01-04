@@ -9,6 +9,7 @@ var product = require('./routes/invoice/product');
 var customer = require('./routes/invoice/customer');
 var person = require('./routes/invoice/person');
 var invoice = require('./routes/invoice/invoice');
+var item = require('./routes/invoice/item');
 
 var http = require('http');
 var path = require('path');
@@ -67,6 +68,10 @@ app.get('/invoice/list', invoice.list(mongoClient));
 app.get('/invoice/add', invoice.addForm(mongoClient));
 app.post('/invoice/add', invoice.add(mongoClient));
 app.get('/invoice/remove', invoice.remove(mongoClient));
+
+// Invoice items
+app.get('/invoice/item/add', item.addForm(mongoClient));
+app.post('/invoice/item/add', item.add(mongoClient));
 
 // JSON data for client side JS.
 app.get('/invoice/people', invoice.people(mongoClient));
