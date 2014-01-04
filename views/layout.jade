@@ -6,4 +6,19 @@ html
       title= title
       link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    div(id="frame")
+      div(id="main-menu")
+        h1.
+          Päävalikko
+        ul
+          li
+            a(href="/invoice/customer/list") Asiakkaat
+          li
+            a(href="/invoice/product/list") Tuotteet
+          li
+            a(href="/invoice/list") Tilaukset/laskutus
+          li
+            a(href="/invoice/settings") Asetukset
+        div(style="clear:both;")
+      div(id="content")
+        block content

@@ -1,7 +1,60 @@
 body {
-  padding: 50px;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+
 a {
   color: #00b7ff;
+  text-decoration:none;
+}
+
+a:hover {
+  text-decoration:underline;
+}
+
+div#frame {
+  width:900px;
+  margin: 0 auto;
+}
+
+div#main-menu {
+  padding:10px 20px;
+  background-color:#f1f1f1;
+}
+
+div#main-menu h1 {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  float:left;
+  padding-right: 10px;
+  display:block;
+}
+
+div#main-menu h1:after {
+  content: ": ";
+}
+
+div#main-menu ul {
+  float:left;
+  list-style-type: none;
+  padding:0;
+  margin:0;
+}
+
+div#main-menu ul li {
+  float:left;
+  padding:10px;
+}
+
+div#content {
+  padding:10px 20px;
+}
+
+table td {
+  padding:5px;
+  background-color:#fafafa;
+}
+
+h2:after {
+  content: ": ";
 }
