@@ -10,11 +10,23 @@ block content
   h1.
     Laskulista
   table 
+    tr
+      th.
+        Laskun tunniste
+      th. 
+        Yhteensä
+      th(colspan="2").
+        Lisätoiminnot
     each invoice, i in invoicelist
       tr
         td
           = invoice.customer.name 
           #{invoice._id}
+        td
+          - var sum = 0;
+          - each item in invoice.items
+            - sum += item.product.price;
+          = sum
         td
           a(href="/invoice/item/add?invoice=#{invoice._id}") Lisää laskurivi
         td
