@@ -34,9 +34,9 @@ exports.add = function(mongoClient) {
         db.collection('product').findOne({_id:new ObjectID(req.body.product)}, {}, function(err, product) {
           invoice.items.push({
             product: product, 
-            "amount-sold": req.body.amountsold, 
-            price: req.body.price,
-            "discount-percentage": req.body.discountpercentage
+            "amount-sold": parseInt(req.body.amountsold), 
+            price: parseFloat(req.body.price),
+            "discount-percentage": parseFloat(req.body.discountpercentage)
           });
           db.collection('invoice').save(invoice, function(err, result) {
             res.render('invoice-added', {});
