@@ -13,8 +13,10 @@ block content
     each customer, i in customerlist
       tr
         td
-          a(href="www.google.com")= customer.name 
+          = customer.name 
         td
-          a(href="/invoice/customer/delete?id=#{customer._id}") Poista asiakas
+          a(href="/invoice/customer/delete?id=#{customer._id}" class="confirm") Poista asiakas
         td
           a(href="/invoice/person/list?customer=#{customer._id}") Näytä yhteyshenkilöt
+        td
+          a(href="/invoice/list?customer=#{customer._id}") Näytä laskut

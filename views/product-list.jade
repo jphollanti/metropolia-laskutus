@@ -13,6 +13,6 @@ block content
     each product, i in productlist
       tr
         td
-          a(href="www.google.com")= product.name
+          = product.name
         td
-          a(href="/invoice/product/remove?id=#{product._id}") Poista tuote
+          a(href="/invoice/product/remove?id=#{product._id}" class="confirm") Poista tuote

@@ -9,9 +9,9 @@ block content
 
   h1.
     Henkilölista
-  ul 
+  table 
     each person, i in personlist
-      li
-        #{person.firstname} #{person.lastname} 
-        a(href="www.google.com")= person.customerName
-        a(href="/invoice/person/delete?delete=#{person._id}") Poista henkilö
+      tr
+        td #{person.firstname} #{person.lastname} 
+        td
+          a(href="/invoice/person/delete?delete=#{person._id}" class="confirm") Poista henkilö

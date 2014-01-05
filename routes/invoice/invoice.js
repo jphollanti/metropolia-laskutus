@@ -23,14 +23,25 @@ exports.people = function(mongoClient) {
 exports.list = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
-      db.collection('invoice').find().toArray(function(err, invoices) {
-        res.render('invoice-list', {
-          "invoicelist": invoices
-        });
-      }); 
+      if (req.query.customer) {
+        db.collection('invoice').find({"customer._id": new ObjectID(req.query.customer)})
+          .toArray(function(err, invoices) {
+          renderList(res, invoices);
+        }); 
+      } else {
+        db.collection('invoice').find().toArray(function(err, invoices) {
+          renderList(res, invoices);
+        }); 
+      }
     });
   };
 };
+
+function renderList(res, invoices) {
+  res.render('invoice-list', {
+    "invoicelist": invoices
+  });
+}
 
 exports.addForm = function(mongoClient) {
   return function(req, res) {
