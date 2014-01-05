@@ -16,3 +16,5 @@ block content
           = product.name
         td
           a(href="/invoice/product/remove?id=#{product._id}" class="confirm") Poista tuote
+        td
+          a(href="/invoice/list?product=#{product._id}") Näytä laskut, joissa tuote esiintyy

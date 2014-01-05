@@ -28,6 +28,11 @@ exports.list = function(mongoClient) {
           .toArray(function(err, invoices) {
           renderList(res, invoices);
         }); 
+      } if (req.query.product) {
+        db.collection('invoice').find({"items.product._id": new ObjectID(req.query.product)})
+          .toArray(function(err, invoices) {
+          renderList(res, invoices);
+        }); 
       } else {
         db.collection('invoice').find().toArray(function(err, invoices) {
           renderList(res, invoices);
