@@ -1,14 +1,14 @@
 var common = require('./common.js');
 var ObjectID = require('mongodb').ObjectID;
 
-exports.people = function(mongoClient) {
+exports.list = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
-      console.log("doinnit");
-      db.collection('person').find({customer:req.query.customer}).toArray(function(err, people) {
-        console.log("still doinnit!");
-        res.write(JSON.stringify(people));
-        res.end();
+      db.collection('invoice').findOne({_id: new ObjectID(req.query.invoice)}
+        , function(err, invoice) {
+        res.render('item-list', {
+            invoice: invoice
+          , items: invoice.items});
       });
     });
   }
@@ -49,16 +49,25 @@ exports.add = function(mongoClient) {
 
 exports.remove = function(mongoClient) {
   return function(req, res) {
-    var delInvoice = req.query.id;
-    if (typeof delInvoice == 'undefined' ||
-        delInvoice === null || 
-        delInvoice === '') {
+    var delProduct = req.query.product;
+    if (typeof delProduct == 'undefined' ||
+        delProduct === null || 
+        delProduct === '') {
+      throw new Error("Document to delete has not been specified.");
+    }
+    var invoiceId = req.query.invoice;
+    if (typeof invoiceId == 'undefined' ||
+        invoiceId === null || 
+        invoiceId === '') {
       throw new Error("Document to delete has not been specified.");
     }
     common.connect(mongoClient, function(err, db) {
-      var iid = new ObjectID(delInvoice);
-      db.collection('product').remove({_id: iid}, {w:1}, function(err, result) {
-        res.render('invoice-removed');
+      var iid = new ObjectID(delProduct);
+      db.collection('invoice').update(
+          {_id: new ObjectID(req.query.invoice)}
+        , {$pull: {"items.product._id": iid}}
+        , function(err, result) {
+        res.render('item-removed');
       });
     });
   };

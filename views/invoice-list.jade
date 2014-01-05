@@ -17,3 +17,5 @@ block content
           #{invoice._id}
         td
           a(href="/invoice/item/add?invoice=#{invoice._id}") Lisää laskurivi
+        td
+          a(href="/invoice/item/list?invoice=#{invoice._id}") Näytä laskurivit

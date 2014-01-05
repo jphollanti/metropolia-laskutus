@@ -70,8 +70,10 @@ app.post('/invoice/add', invoice.add(mongoClient));
 app.get('/invoice/remove', invoice.remove(mongoClient));
 
 // Invoice items
+app.get('/invoice/item/list', item.list(mongoClient));
 app.get('/invoice/item/add', item.addForm(mongoClient));
 app.post('/invoice/item/add', item.add(mongoClient));
+app.get('/item/remove', item.remove(mongoClient));
 
 // JSON data for client side JS.
 app.get('/invoice/people', invoice.people(mongoClient));

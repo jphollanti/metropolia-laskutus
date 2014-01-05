@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1.
+    Laskurivit
+  table 
+    each item, i in items
+      tr
+        td
+          = item.product.name 
+        // comment out
+          td
+            a(href="/item/remove?invoice=#{invoice._id}&product=#{item.product._id}") Poista laskurivi
