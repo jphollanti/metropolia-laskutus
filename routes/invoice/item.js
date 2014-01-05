@@ -39,7 +39,7 @@ exports.add = function(mongoClient) {
             "discount-percentage": parseFloat(req.body.discountpercentage)
           });
           db.collection('invoice').save(invoice, function(err, result) {
-            res.render('invoice-added', {});
+            res.render('item-added', {});
           });
         });
       });
