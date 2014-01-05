@@ -22,6 +22,7 @@ exports.addForm = function() {
 exports.add = function(mongoClient) {
   return function(req, res) {
     common.connect(mongoClient, function(err, db) {
+      req.body.price = parseFloat(req.body.price);
       db.collection('product').insert(req.body, function(err, result) {
         res.render('product-added', {});
       });
