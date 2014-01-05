@@ -1,0 +1,478 @@
+
+> db.customer.find().pretty();
+{
+	"_id" : ObjectId("52c921543b65647346b1a740"),
+	"id" : 1,
+	"name" : "Järvinen Oy",
+	"post-office" : "PORI"
+}
+{
+	"_id" : ObjectId("52c9217a3b65647346b1a741"),
+	"id" : 2,
+	"name" : "Softa OY",
+	"post-office" : "RAISIO"
+}
+{
+	"_id" : ObjectId("52c9218c3b65647346b1a742"),
+	"id" : 3,
+	"name" : "Kokkikoulu",
+	"post-office" : "HELSINKI"
+}
+{
+	"_id" : ObjectId("52c9219e3b65647346b1a743"),
+	"id" : 4,
+	"name" : "Ohjelmistotalo",
+	"post-office" : "HELSINKI"
+}
+{
+	"_id" : ObjectId("52c921b13b65647346b1a744"),
+	"id" : 5,
+	"name" : "Raision talot Oy",
+	"post-office" : "RAISIO"
+}
+{
+	"_id" : ObjectId("52c921c73b65647346b1a745"),
+	"id" : 6,
+	"name" : "Ryhäsen korjaamo",
+	"post-office" : "PORI"
+}
+{
+	"_id" : ObjectId("52c921dc3b65647346b1a746"),
+	"id" : 7,
+	"name" : "Pennasen auto Oy",
+	"post-office" : "PORVOO"
+}
+
+> db.product.find().pretty();
+{
+	"_id" : ObjectId("52c91f203b65647346b1a73c"),
+	"code" : 2,
+	"price" : 1,
+	"name" : "Kynä"
+}
+{
+	"_id" : ObjectId("52c91f483b65647346b1a73d"),
+	"code" : 3,
+	"price" : 500.5,
+	"name" : "Tietokone"
+}
+{
+	"_id" : ObjectId("52c91f5a3b65647346b1a73e"),
+	"code" : 17,
+	"price" : 22,
+	"name" : "Hiirimatto"
+}
+{
+	"_id" : ObjectId("52c91f703b65647346b1a73f"),
+	"code" : 13,
+	"price" : 2,
+	"name" : "Kynä keltainen"
+}
+
+> db.customer.find().pretty();
+{
+	"_id" : ObjectId("52c921543b65647346b1a740"),
+	"id" : 1,
+	"name" : "Järvinen Oy",
+	"post-office" : "PORI"
+}
+{
+	"_id" : ObjectId("52c9217a3b65647346b1a741"),
+	"id" : 2,
+	"name" : "Softa OY",
+	"post-office" : "RAISIO"
+}
+{
+	"_id" : ObjectId("52c9218c3b65647346b1a742"),
+	"id" : 3,
+	"name" : "Kokkikoulu",
+	"post-office" : "HELSINKI"
+}
+{
+	"_id" : ObjectId("52c9219e3b65647346b1a743"),
+	"id" : 4,
+	"name" : "Ohjelmistotalo",
+	"post-office" : "HELSINKI"
+}
+{
+	"_id" : ObjectId("52c921b13b65647346b1a744"),
+	"id" : 5,
+	"name" : "Raision talot Oy",
+	"post-office" : "RAISIO"
+}
+{
+	"_id" : ObjectId("52c921c73b65647346b1a745"),
+	"id" : 6,
+	"name" : "Ryhäsen korjaamo",
+	"post-office" : "PORI"
+}
+{
+	"_id" : ObjectId("52c921dc3b65647346b1a746"),
+	"id" : 7,
+	"name" : "Pennasen auto Oy",
+	"post-office" : "PORVOO"
+}
+> db.invoice.find().pretty();
+{
+	"customer" : {
+		"_id" : ObjectId("52c921543b65647346b1a740"),
+		"id" : 1,
+		"name" : "Järvinen Oy",
+		"post-office" : "PORI"
+	},
+	"person" : {
+		"customer" : "52c921543b65647346b1a740",
+		"person-id" : "AA",
+		"lastname" : "AA",
+		"firstname" : "AA",
+		"title" : "AA",
+		"class" : "AA",
+		"date" : "AA",
+		"additional-info" : "AA",
+		"_id" : ObjectId("52c9225dbcf06ae6035e9bc8")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "TOIMITUS HETI",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:16:53.718Z"),
+	"paid" : null,
+	"items" : [
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f483b65647346b1a73d"),
+				"code" : 3,
+				"price" : 500.5,
+				"name" : "Tietokone"
+			},
+			"amount-sold" : 10,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		},
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f5a3b65647346b1a73e"),
+				"code" : 17,
+				"price" : 22,
+				"name" : "Hiirimatto"
+			},
+			"amount-sold" : 8,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		}
+	],
+	"_id" : ObjectId("52c92305bcf06ae6035e9bcf")
+}
+{
+	"customer" : {
+		"_id" : ObjectId("52c921543b65647346b1a740"),
+		"id" : 1,
+		"name" : "Järvinen Oy",
+		"post-office" : "PORI"
+	},
+	"person" : {
+		"customer" : "52c921543b65647346b1a740",
+		"person-id" : "AA",
+		"lastname" : "AA",
+		"firstname" : "AA",
+		"title" : "AA",
+		"class" : "AA",
+		"date" : "AA",
+		"additional-info" : "AA",
+		"_id" : ObjectId("52c9225dbcf06ae6035e9bc8")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "PIKATOIMITUS",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:17:17.217Z"),
+	"paid" : null,
+	"items" : [
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f483b65647346b1a73d"),
+				"code" : 3,
+				"price" : 500.5,
+				"name" : "Tietokone"
+			},
+			"amount-sold" : 5,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		}
+	],
+	"_id" : ObjectId("52c9231dbcf06ae6035e9bd0")
+}
+{
+	"customer" : {
+		"_id" : ObjectId("52c9218c3b65647346b1a742"),
+		"id" : 3,
+		"name" : "Kokkikoulu",
+		"post-office" : "HELSINKI"
+	},
+	"person" : {
+		"customer" : "52c9218c3b65647346b1a742",
+		"person-id" : "CC",
+		"lastname" : "CC",
+		"firstname" : "CC",
+		"title" : "CC",
+		"class" : "CC",
+		"date" : "CC",
+		"additional-info" : "CC",
+		"_id" : ObjectId("52c9227fbcf06ae6035e9bca")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:17:56.029Z"),
+	"paid" : null,
+	"items" : [
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f703b65647346b1a73f"),
+				"code" : 13,
+				"price" : 2,
+				"name" : "Kynä keltainen"
+			},
+			"amount-sold" : 100,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		}
+	],
+	"_id" : ObjectId("52c923447784e3f60395f689")
+}
+{
+	"customer" : {
+		"_id" : ObjectId("52c921543b65647346b1a740"),
+		"id" : 1,
+		"name" : "Järvinen Oy",
+		"post-office" : "PORI"
+	},
+	"person" : {
+		"customer" : "52c921543b65647346b1a740",
+		"person-id" : "AA",
+		"lastname" : "AA",
+		"firstname" : "AA",
+		"title" : "AA",
+		"class" : "AA",
+		"date" : "AA",
+		"additional-info" : "AA",
+		"_id" : ObjectId("52c9225dbcf06ae6035e9bc8")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:18:10.945Z"),
+	"paid" : null,
+	"items" : [
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f5a3b65647346b1a73e"),
+				"code" : 17,
+				"price" : 22,
+				"name" : "Hiirimatto"
+			},
+			"amount-sold" : 20,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		}
+	],
+	"_id" : ObjectId("52c923527784e3f60395f68a")
+}
+{
+	"customer" : {
+		"_id" : ObjectId("52c9217a3b65647346b1a741"),
+		"id" : 2,
+		"name" : "Softa OY",
+		"post-office" : "RAISIO"
+	},
+	"person" : {
+		"customer" : "52c9217a3b65647346b1a741",
+		"person-id" : "BB",
+		"lastname" : "BB",
+		"firstname" : "BB",
+		"title" : "BB",
+		"class" : "BB",
+		"date" : "BB",
+		"additional-info" : "BB",
+		"_id" : ObjectId("52c92272bcf06ae6035e9bc9")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:18:26.333Z"),
+	"paid" : null,
+	"items" : [
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f5a3b65647346b1a73e"),
+				"code" : 17,
+				"price" : 22,
+				"name" : "Hiirimatto"
+			},
+			"amount-sold" : 6,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		},
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f703b65647346b1a73f"),
+				"code" : 13,
+				"price" : 2,
+				"name" : "Kynä keltainen"
+			},
+			"amount-sold" : 5,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		},
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f483b65647346b1a73d"),
+				"code" : 3,
+				"price" : 500.5,
+				"name" : "Tietokone"
+			},
+			"amount-sold" : 1,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		}
+	],
+	"_id" : ObjectId("52c923627784e3f60395f68b")
+}
+{
+	"customer" : {
+		"_id" : ObjectId("52c9219e3b65647346b1a743"),
+		"id" : 4,
+		"name" : "Ohjelmistotalo",
+		"post-office" : "HELSINKI"
+	},
+	"person" : {
+		"customer" : "52c9219e3b65647346b1a743",
+		"person-id" : "DD",
+		"lastname" : "DD",
+		"firstname" : "DD",
+		"title" : "DD",
+		"class" : "DD",
+		"date" : "DD",
+		"additional-info" : "DD",
+		"_id" : ObjectId("52c9228cbcf06ae6035e9bcb")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:18:40.592Z"),
+	"paid" : null,
+	"items" : [ ],
+	"_id" : ObjectId("52c923707784e3f60395f68c")
+}
+{
+	"customer" : {
+		"_id" : ObjectId("52c9217a3b65647346b1a741"),
+		"id" : 2,
+		"name" : "Softa OY",
+		"post-office" : "RAISIO"
+	},
+	"person" : {
+		"customer" : "52c9217a3b65647346b1a741",
+		"person-id" : "BB",
+		"lastname" : "BB",
+		"firstname" : "BB",
+		"title" : "BB",
+		"class" : "BB",
+		"date" : "BB",
+		"additional-info" : "BB",
+		"_id" : ObjectId("52c92272bcf06ae6035e9bc9")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "ei ole kiirelliinen",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:19:21.742Z"),
+	"paid" : null,
+	"items" : [
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f5a3b65647346b1a73e"),
+				"code" : 17,
+				"price" : 22,
+				"name" : "Hiirimatto"
+			},
+			"amount-sold" : 5,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		}
+	],
+	"_id" : ObjectId("52c923997784e3f60395f68d")
+}
+{
+	"customer" : {
+		"_id" : ObjectId("52c921c73b65647346b1a745"),
+		"id" : 6,
+		"name" : "Ryhäsen korjaamo",
+		"post-office" : "PORI"
+	},
+	"person" : {
+		"customer" : "52c921c73b65647346b1a745",
+		"person-id" : "FF",
+		"lastname" : "FF",
+		"firstname" : "FF",
+		"title" : "FF",
+		"class" : "FF",
+		"date" : "FF",
+		"additional-info" : "FF",
+		"_id" : ObjectId("52c922afbcf06ae6035e9bcd")
+	},
+	"payment-time" : "",
+	"penalty-interest" : "",
+	"includes-vat" : "",
+	"notes" : "",
+	"status" : 1,
+	"created" : ISODate("2014-01-05T09:19:35.875Z"),
+	"paid" : null,
+	"items" : [
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f203b65647346b1a73c"),
+				"code" : 2,
+				"price" : 1,
+				"name" : "Kynä"
+			},
+			"amount-sold" : 500,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		},
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f5a3b65647346b1a73e"),
+				"code" : 17,
+				"price" : 22,
+				"name" : "Hiirimatto"
+			},
+			"amount-sold" : 3,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		},
+		{
+			"product" : {
+				"_id" : ObjectId("52c91f203b65647346b1a73c"),
+				"code" : 2,
+				"price" : 1,
+				"name" : "Kynä"
+			},
+			"amount-sold" : 2,
+			"price" : NaN,
+			"discount-percentage" : NaN
+		}
+	],
+	"_id" : ObjectId("52c923a77784e3f60395f68e")
+}
